@@ -1,7 +1,7 @@
-# MAIN_PROGRAM
+# MAIN-PROGRAM
 ![Screenshot from 2022-12-26 08-15-27](https://user-images.githubusercontent.com/90656786/209512060-f7958035-bbd6-436a-8277-c083d98a623f.png) 
 
-# FILE_EXPLORER
+# FILE-EXPLORER
 ![Screenshot from 2022-12-29 13-08-03](https://user-images.githubusercontent.com/90656786/209943391-4f9a0a99-f0d5-4442-ad67-fa7eb121a821.png)
 
 
