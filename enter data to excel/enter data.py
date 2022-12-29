@@ -9,7 +9,6 @@ root = Tk()
 root.withdraw()
 root.title('File Explorer') # Set window title
 filename = filedialog.askopenfilename(initialdir = "\\",initialfile='hello',title = "Select a File",filetypes ={("excel files","*.xlsx*"),("all files","*.*"),("PNG", "*.png"),("excel files","*.ods*")})
-print(filename)
 x=str(filename)
 df = pd.read_excel(str(x))
 #layout Appearance
@@ -56,3 +55,4 @@ while True:
         sg.popup('Data saved!')
         clear_input()
 window.close()
+
