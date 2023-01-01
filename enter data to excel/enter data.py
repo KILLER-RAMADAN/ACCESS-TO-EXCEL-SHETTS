@@ -8,9 +8,12 @@ sg.theme('DarkBlack')
 root = Tk()
 root.withdraw()
 root.title('File Explorer BY AHMED RAMADAN') # Set window title
-layout = [[sg.T("")], [sg.Text("CHOOSE EXCEL FILE: "), sg.Input(key="-IN2-" ,change_submits=True), sg.FileBrowse(key="-IN-",file_types={("ALL FILES","*.*"),("PNG", "*.png"),("JPEG", "*.jpg"),("EXCEL FILE","*.xlsx*")})],[sg.Button("Submit")]]
+layout = [[sg.T("")], [sg.Text("BY AHMED RAMADAN",relief="ridge"),sg.Text("CHOOSE EXCEL FILE: "), sg.Input(key="-IN2-" ,change_submits=True), sg.FileBrowse(key="-IN-",file_types={("ALL FILES","*.*"),("PNG", "*.png"),("JPEG", "*.jpg"),("EXCEL FILE","*.xlsx*")})],[sg.Button("Submit")]]
 ###Building Window
-window = sg.Window('FILE BROWSER BY AHMED RAMADAN 🐱‍👤', layout, size=(600,120))   
+window = sg.Window('FILE BROWSER 💾',
+                   layout,
+                   default_element_size=(50,0),
+                   resizable=False, finalize=True)   
 while True:
     event, values = window.read()
     if event == sg.WIN_CLOSED or event=="Exit":
@@ -23,15 +26,17 @@ while True:
         os.startfile(values["-IN-"])  
 #layout Appearance
     layout = [
+     [sg.Text("BY AHMED RAMADAN",relief="ridge")],
      [sg.Text('Please fill out the following fields:')],
      [sg.Text('ID', size=(15, 1)), sg.Spin(
-        [i for i in range(1, 10001)], initial_value=0, key='ID')],
+        [i for i in range(1, 10000001)], initial_value=0, key='ID')],
      [sg.Text('Name', size=(15, 1)), sg.InputText(key='Name')],
+     [sg.Text('Email', size=(15, 1)), sg.InputText(key='Email')],
      [sg.Text('phone number', size=(15, 1)), sg.InputText(key="phone number")],
      [sg.Text('City', size=(15, 1)), sg.InputText(key='City')],
      [sg.Text('Favorite Color', size=(15, 1)), sg.Combo(
         ['Green', 'Blue', 'Red', "black", "yellow"], key='Favorite Color')],
-     [sg.Text('I speak', size=(15, 1)),
+     [sg.Text('Language', size=(15, 1)),
      sg.Checkbox('German', key='German'),
      sg.Checkbox('Spanish', key='Spanish'),
      sg.Checkbox('English', key='English'),
@@ -41,7 +46,7 @@ while True:
      [sg.Submit(), sg.Button('Clear'), sg.Exit()]
   ]
 # window preferences
-window = sg.Window('ADD DATA TO EXCEL SHEETS BY "AHMED RAMADAN" 🐱‍🏍',
+window = sg.Window(' EXCEL SHEETS ACCESS 💾',
                    layout,
                    default_element_size=(50, 60),
                    resizable=True, finalize=True)
@@ -66,4 +71,6 @@ while True:
         sg.popup('Data inserted!!')
         clear_input()
 window.close()
+
+
 
