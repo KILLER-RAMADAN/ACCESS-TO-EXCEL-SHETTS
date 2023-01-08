@@ -3,13 +3,19 @@ from tkinter import *
 import PySimpleGUI as sg
 import pandas as pd
 import os
+sg.theme("DarkGrey15")
 #____connection to sqlite3_______
 db=sqlite3.connect("data.db")
 cr=db.cursor()
 cr.execute('''create table if not exists "accounts" (ID integer ,user_name text ,password text )''')
+#_____make a function to destroy your window______
+def quit():
+    global root
+    root.quit()
+    
 #_____Make Gui Software______
 root = Tk() 
-root.geometry("370x133")  
+root.geometry("370x135")  
 root.title('Signup_Form')
 lbl=Label(root, text="Developed by Ahmed Ramadan",relief="ridge", fg='Black', font=("ROMAN", 16))
 lbl.place(x=0, y=100)
@@ -26,7 +32,8 @@ user_entry.grid(row=0, column=1)
 pass_label.grid(row=1, column=0)  
 pass_entry.grid(row=1, column=1)  
 # Create a login button and place it in the third row of grid manager    
-Button ( root , text="Signup" , command = lambda : checklogin1()).grid ( row = 25 ,columnspan = 500 )     
+Button ( root , text="Signup" , command = lambda : checklogin1()).place(x=120, y=70) 
+Button(root, text="Quit", command=quit).place(x=220, y=70)    
 def checklogin1():
   #____check if your id found in database or not_____ 
  if user_entry.get()!="" and pass_entry.get()!="" and id_entry.get()!="":
@@ -39,7 +46,8 @@ def checklogin1():
         else:
           sg.popup(f"Welcome {user_entry.get().upper()}")
         root.title("Login_Form")
-        Button ( root , text="Login Now With Your Account" , command = lambda : logain()).grid ( row = 25 ,columnspan = 5 )   
+        Button ( root , text="Login Now With Your Account" , command = lambda : logain()).place(x=91, y=70)
+        Button(root, text="Quit", command=quit).place(x=280, y=40) 
         def logain():
          data=cr.execute(f'''SELECT password FROM accounts WHERE ID="{id_entry.get()}"''').fetchone()
          data1=cr.execute(f'''SELECT password FROM accounts WHERE user_name="{user_entry.get()}"''').fetchone()
@@ -53,10 +61,10 @@ def checklogin1():
           root.withdraw()
           #____Access To Excel Sheets_____
           root1 = Tk() 
-          root1.geometry("380x120")
+          root1.geometry("380x135")
           root1.title('Access To Program')
           lbl1=Label(root1, text="Developed by Ahmed Ramadan",relief="ridge", fg='Black', font=("ROMAN", 16))
-          lbl1.place(x=0, y=90)
+          lbl1.place(x=0, y=100)
           user_label1= Label(root1, text = 'Username') 
           user_entry1 = Entry(root1) 
           pass_label1 = Label(root1, text = 'Password') 
@@ -69,21 +77,26 @@ def checklogin1():
           user_entry1.grid(row=0, column=1)  
           pass_label1.grid(row=1, column=0)  
           pass_entry1.grid(row=1, column=1)  
-          Button ( root1 , text="Login To Program With Your ID" , command = lambda : checklogin()).grid ( row = 70 ,columnspan = 100 )
+          Button ( root1 , text="Login To Program With Your ID" , command = lambda : checklogin()).place(x=70, y=70) 
+          Button(root1, text="Quit", command=quit).place(x=240, y=40) 
           #________File Browser_________
           def checklogin():
            menu_def=[["Help",["About"]]] 
-           sg.theme("SystemDefault")
+           sg.theme("DarkGrey15")
            if user_entry1.get()==user_entry.get() and pass_entry1.get() == pass_entry.get() and id_entry1.get()==id_entry.get():
              root1.withdraw()
              sg.popup(f"Login Successfully {user_entry.get()} Enjoy")             
              root1.title("Login Successfully")
-             layout = [[sg.MenubarCustom(menu_def,tearoff=False)],[sg.T("")], [sg.Text("CHOOSE EXCEL FILE: "), sg.Input(key="-IN2-" ,change_submits=True), sg.FileBrowse(button_color="tomato",key="-IN-",file_types={("EXCEL FILE","*.xlsx*")})],[sg.Button("Submit",s=16,button_color="tomato")]]
-             window = sg.Window('FILE BROWSER 💾',layout,default_element_size=(10,0))
+             layout = [[sg.MenubarCustom(menu_def,tearoff=False)],[sg.T("")], [sg.Text("CHOOSE EXCEL FILE: "), sg.Input(key="-IN2-" ,change_submits=True), sg.FileBrowse(button_color="tomato",key="-IN-",file_types={("EXCEL FILE","*.ods")})],[sg.Button("Submit",s=16,button_color="tomato")],[sg.Button("Exit",s=16,button_color="tomato")]]
+             window = sg.Window('FILE BROWSER 💾',
+                   layout,
+                   default_element_size=(50, 60),
+                   resizable=False, finalize=True,use_custom_titlebar=True)
               #_______running software________
              while True:
               event, values = window.read()
               if event == sg.WIN_CLOSED or event=="Exit":
+               quit()
                break  
               if event=="About":
                window.disappear()
@@ -96,7 +109,8 @@ def checklogin1():
                sg.popup("preparing app.")
                window.close()
                #_________components of software_________
-              layout = [
+               menu_def=[["Help",["About"]]] 
+              layout = [[sg.MenubarCustom(menu_def,tearoff=False)],
               [sg.Text("BY AHMED RAMADAN",relief="ridge")],
               [sg.Text('Please fill out the following fields:')],
               [sg.Text('ID', size=(15, 1)), sg.Spin(
@@ -124,7 +138,7 @@ def checklogin1():
               [sg.Submit(s=16,button_color="tomato"), sg.Button('Clear',size=16,button_color="tomato"), sg.Exit(s=16,button_color="tomato")]]   
              window = sg.Window(' EXCEL SHEETS ACCESS 💾',
                    layout,
-                   default_element_size=(50, 60),
+                   default_element_size=(100, 60),
                    resizable=False, finalize=True,use_custom_titlebar=True)
              def clear_input():
               for key in values:
@@ -135,10 +149,15 @@ def checklogin1():
               event, values = window.read()
               if event == sg.WIN_CLOSED or event == 'Exit':
                sg.popup("Thanks For Using Program..☺")
+               quit()
                break
               if event == 'Clear':
                clear_input()
-               sg.popup("data cleared") 
+               sg.popup("data cleared")
+              if event=="About":
+               window.disappear()
+               sg.popup("Version 2.0","Access Excel File..","BY_AHMED_RAMADAN",grab_anywhere=True)
+               window.reappear() 
               if event == 'Submit':
                new_record = pd.DataFrame(values, index=[0])
                read_excel_file = pd.concat([read_excel_file, new_record], ignore_index=True)
