@@ -4,7 +4,7 @@ import PySimpleGUI as sg
 import pandas as pd
 import os
 sg.theme("DarkGrey15")
-#____connection to sqlite3_______
+#____connection to sqlite3_______#
 db=sqlite3.connect("data.db")
 cr=db.cursor()
 cr.execute('''create table if not exists "accounts" (ID integer ,user_name text ,password text )''')
