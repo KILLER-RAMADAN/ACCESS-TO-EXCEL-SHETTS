@@ -1,0 +1,9 @@
+openpyxl latest version==3.0.9
+pandas latest version==1.2.0
+PySimpleGUI latest version==4.41.2
+tkinter latset version 
+**how to convert this program to exe**
+FIRST:go to your file and (press shift and right click together)
+second:click on powershell
+theird:run this command <pip install pyinstaller>
+fourth:wait untill install everything,and run this command<pyinstaller --onefile -- noconsole python filename.py>
