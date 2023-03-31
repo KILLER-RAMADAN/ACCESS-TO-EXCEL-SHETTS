@@ -1,7 +1,9 @@
 openpyxl latest version==3.0.9
 pandas latest version==1.2.0
 PySimpleGUI latest version==4.41.2
-tkinter latset version 
+sqlite3 latest vesion
+tkinter latset version
+os latest version
 **how to convert this program to exe**
 FIRST:go to your file and (press shift and right click together)
 second:click on powershell
