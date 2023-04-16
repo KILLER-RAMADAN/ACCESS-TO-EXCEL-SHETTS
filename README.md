@@ -1,11 +1,4 @@
-# DATABASE_ACCESS
-![Screenshot 2023-01-14 191759](https://user-images.githubusercontent.com/90656786/212486413-f7386a22-75a6-438d-ab95-7ebc7b5fb334.png)
-
- 
- 
- 
-![Screenshot 2023-01-14 191830](https://user-images.githubusercontent.com/90656786/212486423-c2f1c594-c6fb-4639-88d0-c2b6bd748da2.png)
-
+# DATABASE_ACCESS & LOGIN SYSTEM
 
 
 # FILE-EXPLORER
